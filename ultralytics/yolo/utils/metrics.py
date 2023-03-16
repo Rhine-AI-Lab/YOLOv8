@@ -246,14 +246,19 @@ class ConfusionMatrix:
             sn.heatmap(array,
                        ax=ax,
                        annot=nc < 30,
-                       annot_kws={
-                           'size': 8},
+                       annot_kws={'size': 8},
                        cmap='Blues',
                        fmt='.2f',
                        square=True,
                        vmin=0.0,
                        xticklabels=ticklabels,
                        yticklabels=ticklabels).set_facecolor((1, 1, 1))
+        if labels:
+            ticks_size = 14
+            if nn > 50:
+                ticks_size *= 50 / nn
+            plt.xticks(fontsize=ticks_size)
+            plt.yticks(fontsize=ticks_size)
         ax.set_xlabel('True')
         ax.set_ylabel('Predicted')
         ax.set_title('Confusion Matrix')
